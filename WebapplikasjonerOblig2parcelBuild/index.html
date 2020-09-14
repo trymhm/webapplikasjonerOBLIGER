@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="style.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<div id="pageWrapper">
+  <button id="nyTodo"><span>+</span> Todo</button>
+
+
+
+<div id="modal" class="modal">
+
+  <div class="modal-content">
+      <h2>
+          Create new todo
+      </h2>
+    <form>
+        <label for="title">Title</label>
+        <input value="Skolearbeid" type="text" id="title" name="title">
+        <label for="author">Author</label>
+        <input value="Trym" type="text" id="author" name="author">
+        <label for="description">Description</label>
+        <input value="Javascript" type="text" id="description" name="description">
+    </form>
+    <button id="createTodo">Create</button>
+  </div>
+
+</div> 
+
+
+
+  <div id="todoList">
+
+  </div>
+
+  <div>
+    <h2>Completed Todos</h2>
+    <p>Filter by date</p><input type="checkbox" id="box">
+    
+   
+  
+
+
+    <ul id="tableHeader">
+        <li>
+            Title
+        </li>
+        <li>
+            Author
+        </li>
+        <li>
+            Description
+        </li>
+        <li>
+            Completed date
+        </li>
+    </ul>
+    <div id="completedItemsList">
+
+    </div>
+  </div>
+</div>
+
+  
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+  <a href="oppgave5/index.html"></a>
+
+</body>
+
+</html>
