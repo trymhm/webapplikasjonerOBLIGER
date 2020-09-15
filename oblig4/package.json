@@ -1,0 +1,17 @@
+{
+  "name": "oblig4",
+  "version": "1.0.0",
+  "description": "Hei.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Trym",
+  "license": "ISC",
+  "dependencies": {
+    "expect": "^26.4.2",
+    "nodemon": "^2.0.4"
+  }
+}
