@@ -304,7 +304,7 @@ try {
 	})();
 	
 
-  /*
+  
 	(function UseObjectSpreadProperties2() {
 		let obj1 = { a: 100, b: 2, c: 300 };
 		let obj2 = { b: 0, d: 100, e: 200};
@@ -326,7 +326,7 @@ try {
 
 		solved++;
 	})();
-	*/
+	
 
   ////// BONUS //////
 
