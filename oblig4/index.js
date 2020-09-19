@@ -244,7 +244,7 @@ try {
   (function UseParameterDestructuring2() {
     // Adjust the code to let the test succeed.
 
-    const a = 'Oslo' + 985;
+    const a = {name:'Oslo', age:985}
 
     // Don't make changes below this line
 
@@ -282,6 +282,7 @@ try {
 		solved++;
 	})();
 	
+  
 
   /// Object Spread Properties (ES2018) ///
 
@@ -290,7 +291,7 @@ try {
 		let obj = { val: 1 };
 		
 		// Use Object Spread Properties to let the tests succeed.
-		let copy = obj;
+		let copy = {...obj};
 
 		// Don't make changes below this line	
 		
