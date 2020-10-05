@@ -1,0 +1,81 @@
+.App{
+    width: 60vw;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+h1,h2{
+    margin-top: 30px;
+}
+
+#todoWrapper{
+    display: flex;
+    justify-content: space-between;
+    min-height: 200px;
+    width:60vw;
+    margin: 30px 0;
+}
+
+.card{
+    width: 30%;
+    margin: 1,5%;
+}
+
+#fuck{
+    margin-top:30px;
+}
+
+.card-body button{
+    margin-right: 15px;
+}
+
+form{
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.livmorhalskreft{
+   display:hidden;
+    z-index: 99999;
+    background-color: white;
+    position: absolute;
+    top: 20vh;
+    left:35vw;
+    width:30vw;
+    border-radius: 4px;
+    border: 1px lightgrey solid;
+    padding: 2%;
+}
+
+.livmorhalskreft h3{
+    margin: 0 auto;
+    margin-bottom: 30px;
+    
+}
+
+form input{
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px grey solid;
+    padding: 6px;
+}
+
+.kukost{
+    margin: 0 auto;
+}
+
+.blurry{
+    filter: blur(0px);
+}
+
+.hidden{
+    display: hidden;
+}
+
+#flexthismorrapuler{
+    display: flex;
+    justify-content: space-between;
+}
+
+
