@@ -35,35 +35,27 @@ export default function App() {
     opprettet: "10.01.2020"
   }]
   const [modal, setModal] = useState(false);
-  const [formData, setFormData] = useState({ title: "" });
+  const [formData, setFormData] = useState({ tittel: "" ,beskrivelse:"",person:"",utfort:"",opprettet:""});
   const [todos, setTodos] = useState(todoItems);
 
   return (
     <div className="App">
-      <FormTodo modal={modal}/>
-      <div className="blurry">
-        <h1>Liste over gjøremål</h1>
-        <div id="todoWrapper">
-          <Todos todos={todos} setTodos={setTodos}/>
+      {modal&&<FormTodo modal={modal} setModal={setModal} formData={formData} setFormData={setFormData}/>} 
+        <h1 className={modal&&"blurry"}>Liste over gjøremål</h1>
+        <div className={modal&&"blurry"} id="todoWrapper">
+          <Todos className={modal&&"blurry"} todos={todos} setTodos={setTodos}/>
         </div>
-        <CreateTodoButton modal={modal} setModal={setModal}/>
-        <h2 id="fuck">Fullførte gjøremål</h2>
-        <TableDone todos={todos} setTodos={setTodos}/>
-      </div>
+        <CreateTodoButton className={modal&&"blurry"} modal={modal} setModal={setModal}/>
+        <h2 className={modal&&"blurry"} id="fuck">Fullførte gjøremål</h2>
+        <TableDone className={modal&&"blurry"} todos={todos} setTodos={setTodos} modal={modal}/>
     </div>
   );
 }
 
-const FormTodo = ({modal})=>{
+const FormTodo = ({setModal,setFormData,formData})=>{
 
   const formSubmit = ()=>{
     return ""
-  }
-
-  const showHide =(modal)=>{
-    var element = document.getElementById("modalBoks");
-    if(modal)element.classList.remove("hidden");
-    if(!modal)element.classList.add("hidden");
   }
 
   return (
@@ -76,12 +68,12 @@ const FormTodo = ({modal})=>{
         <label for="author">Author</label>
         <input value="Trym" type="text" id="author" name="author"/>
         <label for="description">Description</label>
-        <input value="Javascript" type="text" id="description" name="description"/>
+        <textarea value="Javascript" type="text" id="description" maxlength="50" name="description"/>
         
     </form>
     <div id="flexthismorrapuler">
         <Button className="kukost">Bekreft</Button>
-        <Button variant="btn-danger" className="kukost" onClick={()=>showHide(modal)}>Lukk</Button>
+        <Button variant="btn-danger" className="kukost" onClick={()=>setModal(false)}>Lukk</Button>
     </div>
         
     </div>
@@ -91,10 +83,10 @@ const FormTodo = ({modal})=>{
 
 
 
-const TableRow =({todo,removeSelf})=>{
+const TableRow =({todo,removeSelf,modal})=>{
 
   return(
-  <tr>
+  <tr className={modal&&"blurry"} >
     <th scope="row">{todo.id}</th>
     <td>{todo.tittel}</td>
     <td>{todo.beskrivelse}</td>
@@ -107,21 +99,21 @@ const TableRow =({todo,removeSelf})=>{
   );
 }
 
-const TableDone = ({todos,setTodos})=>{
+const TableDone = ({todos, modal, setTodos})=>{
   const addDone =(todo)=>{
     if(!todo.utfort)return;
-    return <TableRow todo={todo} removeSelf={removeSelf}/>
+    return <TableRow modal={modal} todo={todo} removeSelf={removeSelf}/>
   }
 
   const removeSelf = (id)=>{
-    const updatedTodos = todos.filter(todo => todo.id != id)
+    const updatedTodos = todos.filter(todo => todo.id !== id)
     setTodos(updatedTodos)
   }
 
 
   return(
     <>
-      <Table responsive>
+      <Table responsive className={modal&&"blurry"} >
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -158,27 +150,27 @@ const Todos = ({todos, setTodos}) =>{
   }
 
   const makeDone = (todo)=>{
-    if(todo=="feil")return
+    if(todo==="feil")return
     const changed = todo
     changed.utfort ="10.01.2020"
     return changed;
   }
 
   const addDone = (id)=>{
-    const todosFunct = todos.filter(todo => todo.id != id)
-    const updatedTodos = todos.filter(todo => todo.id == id)
+    const todosFunct = todos.filter(todo => todo.id !== id)
+    const updatedTodos = todos.filter(todo => todo.id === id)
     const finishedList = updatedTodos.map(makeDone)
     setTodos(finishedList.concat(todosFunct))
     console.log(finishedList.concat(todosFunct))
   }
 
   const removeSelf =(id)=>{
-    const nyListe = todos.filter(todo => todo.id != id)
+    const nyListe = todos.filter(todo => todo.id !== id)
     setTodos(nyListe)
   }
 
   return(
-    todos.filter(todo => todo.utfort == false).map(todo => addTodos(todo))
+    todos.filter(todo => todo.utfort === false).map(todo => addTodos(todo))
   );
 };
 
