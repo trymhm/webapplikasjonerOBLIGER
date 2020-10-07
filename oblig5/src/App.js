@@ -14,7 +14,7 @@ export default function App() {
       {modal&&<FormTodo modal={modal} setModal={setModal} todoslength={todos.length} setTodos={setTodos} todos={todos} formData={formData} setFormData={setFormData}/>} 
         <h1 className={modal&&"blurry"}>Liste over gjøremål</h1>
         <div className={modal&&"blurry"} id="todoWrapper">
-          <Todos className={modal&&"blurry"} todos={todos} setTodos={setTodos}/>
+          {todos.length<1?<h3>Jippi! Ingen todos i dag</h3>:<Todos className={modal&&"blurry"} todos={todos} setTodos={setTodos}/>}
         </div>
         <CreateTodoButton className={modal&&"blurry"} modal={modal} setModal={setModal}/>
         <h2 className={modal&&"blurry"} id="fuck">Fullførte gjøremål</h2>
