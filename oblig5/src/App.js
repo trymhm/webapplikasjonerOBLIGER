@@ -40,7 +40,7 @@ export default function App() {
 
   return (
     <div className="App">
-      {modal&&<FormTodo modal={modal} setModal={setModal} formData={formData} setFormData={setFormData}/>} 
+      {modal&&<FormTodo modal={modal} setModal={setModal} todos={todos.length} formData={formData} setFormData={setFormData}/>} 
         <h1 className={modal&&"blurry"}>Liste over gjøremål</h1>
         <div className={modal&&"blurry"} id="todoWrapper">
           <Todos className={modal&&"blurry"} todos={todos} setTodos={setTodos}/>
@@ -52,27 +52,63 @@ export default function App() {
   );
 }
 
-const FormTodo = ({setModal,setFormData,formData})=>{
+const FormTodo = ({setModal,setFormData,formData,todos})=>{
+  let tittel;
+  let person;
+  let beskrivelse;
+
+  const setTittel =(formTittel)=> {
+    console.log(formTittel)
+    tittel=formTittel;
+  }
+
+  const setPerson =(formPerson)=> {
+    person=formPerson;
+  }
+
+  const setBeskrivelse =(formBeskrivelse)=> {
+    beskrivelse=formBeskrivelse;
+  }
 
   const formSubmit = ()=>{
-    return ""
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    const yyyy = today.getFullYear();
+
+    today = mm + '.' + dd + '.' + yyyy;
+    
+    setFormData(
+      {
+        id: todos + 1,
+        tittel: tittel,
+        beskrivelse: beskrivelse,
+        person: person,
+        utfort: false,
+        opprettet: today
+      }
+    )
+    setModal(false)
+
+    console.log(todos)
   }
+
 
   return (
     <>
     <div id="modalBoks" className="livmorhalskreft">
       <h3>Nytt gjøremål</h3>
     <form className="form-group">
-        <label for="title">Title</label>
-        <input value="Skolearbeid" type="text" id="title" name="title"/>
-        <label for="author">Author</label>
-        <input value="Trym" type="text" id="author" name="author"/>
-        <label for="description">Description</label>
-        <textarea value="Javascript" type="text" id="description" maxlength="50" name="description"/>
+        <label >Title</label>
+        <input id="tit"  onChange={(e) => { setTittel(e.target.value)}} type="text" id="title" name="title"/>
+        <label >Author</label>
+        <input id="per" onChange={(e) => { setPerson(e.target.value)}} type="text" id="author" name="author"/>
+        <label>Description</label>
+        <textarea id="bes" onChange={(e) => { setBeskrivelse(e.target.value)}} type="text" id="description" maxength="50" name="description"/>
         
     </form>
     <div id="flexthismorrapuler">
-        <Button className="kukost">Bekreft</Button>
+        <Button className="kukost" onClick={()=>formSubmit()}>Bekreft</Button>
         <Button variant="btn-danger" className="kukost" onClick={()=>setModal(false)}>Lukk</Button>
     </div>
         
@@ -137,7 +173,7 @@ const CreateTodoButton = ({ modal, setModal}) =>{
 
   return(
     <>
-      <Button variant="primary btn-lg btn-block" onClick={()=>modal?setModal(false):setModal(true)}>+ Legg til ny</Button>
+      <Button className={modal&&"blurry"} variant="primary btn-lg btn-block" onClick={()=>modal?setModal(false):setModal(true)}>+ Legg til ny</Button>
     </>
   )
 }
