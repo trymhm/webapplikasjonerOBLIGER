@@ -5,42 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
 export default function App() {
-  let todoItems = [{
-    id: 1,
-    tittel: "Dette må gjøres",
-    beskrivelse:"Husk flekken",
-    person: "trym",
-    utfort: false,
-    opprettet: "10.01.2020"
-  },{
-    id: 2,
-    tittel: "Dette må gjøres2",
-    beskrivelse:"Husk lekasjen",
-    person: "kamil",
-    utfort: false,
-    opprettet: "10.01.2020"
-  },{
-    id: 3,
-    tittel: "Så fort som mulig!!",
-    beskrivelse:"Veldig viktig at dette skjer før alt annet",
-    person: "abdi",
-    utfort: false,
-    opprettet: "10.01.2020"
-  },{
-    id: 4,
-    tittel: "Ferdig test",
-    beskrivelse:"Dont mine me",
-    person: "Tester",
-    utfort: "10.01.2020",
-    opprettet: "10.01.2020"
-  }]
   const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({ tittel: "" ,beskrivelse:"",person:"",utfort:"",opprettet:""});
-  const [todos, setTodos] = useState(todoItems);
+  const [todos, setTodos] = useState([]);
 
   return (
     <div className="App">
-      {modal&&<FormTodo modal={modal} setModal={setModal} todos={todos.length} formData={formData} setFormData={setFormData}/>} 
+      {modal&&<FormTodo modal={modal} setModal={setModal} todoslength={todos.length} setTodos={setTodos} todos={todos} formData={formData} setFormData={setFormData}/>} 
         <h1 className={modal&&"blurry"}>Liste over gjøremål</h1>
         <div className={modal&&"blurry"} id="todoWrapper">
           <Todos className={modal&&"blurry"} todos={todos} setTodos={setTodos}/>
@@ -52,7 +23,7 @@ export default function App() {
   );
 }
 
-const FormTodo = ({setModal,setFormData,formData,todos})=>{
+const FormTodo = ({setModal,setFormData,formData,todoslength,todos,setTodos})=>{
   let tittel;
   let person;
   let beskrivelse;
@@ -78,19 +49,18 @@ const FormTodo = ({setModal,setFormData,formData,todos})=>{
 
     today = mm + '.' + dd + '.' + yyyy;
     
-    setFormData(
-      {
-        id: todos + 1,
+    setTodos([
+      ...todos,{
+        id: todoslength + 1,
         tittel: tittel,
         beskrivelse: beskrivelse,
         person: person,
         utfort: false,
         opprettet: today
-      }
+      }]
     )
-    setModal(false)
 
-    console.log(todos)
+    setModal(false) 
   }
 
 
@@ -100,11 +70,11 @@ const FormTodo = ({setModal,setFormData,formData,todos})=>{
       <h3>Nytt gjøremål</h3>
     <form className="form-group">
         <label >Title</label>
-        <input id="tit"  onChange={(e) => { setTittel(e.target.value)}} type="text" id="title" name="title"/>
+        <input onChange={(e) => { setTittel(e.target.value)}} type="text" id="title" />
         <label >Author</label>
-        <input id="per" onChange={(e) => { setPerson(e.target.value)}} type="text" id="author" name="author"/>
+        <input onChange={(e) => { setPerson(e.target.value)}} type="text" id="author" />
         <label>Description</label>
-        <textarea id="bes" onChange={(e) => { setBeskrivelse(e.target.value)}} type="text" id="description" maxength="50" name="description"/>
+        <textarea onChange={(e) => { setBeskrivelse(e.target.value)}} type="text" id="description" maxength="50" />
         
     </form>
     <div id="flexthismorrapuler">
